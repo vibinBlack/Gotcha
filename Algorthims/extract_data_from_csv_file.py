@@ -10,4 +10,4 @@ with open("business-financial-data-sep-2021-quarter.csv",'r') as file:
         rows_data.append(row) 
 
 print(columns_heading)
-print(rows_data)
+#print(rows_data)
