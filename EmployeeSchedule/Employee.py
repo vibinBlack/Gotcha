@@ -186,9 +186,12 @@ urcal = 1
 while urcal:
     cmp_emp1 = int(input("Meeting to schedule between empno:"))
     cmp_emp2 = int(input("and empno:"))
-    meet_hrs = float(input("Meet in hrs : "))
-    meet = int(meet_hrs*60)
-        #print(meet)
+    meet_hrs = input("Meet in hrs : ")
+    meet_hrs = meet_hrs.split(':')
+    t1 = int(meet_hrs[0])
+    t2 = int(meet_hrs[1])
+    meet = int(t1*60 + t2)
+    #print(meet)
     i = cmp_emp1 -1
     j = cmp_emp2 -1
 
