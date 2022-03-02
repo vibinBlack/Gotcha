@@ -194,8 +194,8 @@ emp_sch = list()                      #List of all employee schedules
 for i in range(len(empid)):
     emp_sch.append([[intime[i],breakt[i]],[backt[i],outime[i]]])
 #print(emp_sch)
-urcal = int(input("Want to schedule meeting \n Enter 0 or 1 : \n"))                             #To schedule a meet or not
-while urcal:
+#To schedule a meet or not
+while int(input("Want to schedule a new meet \n Enter 0 or 1 : \n")):
     print("\nKnow your Staff")
     print(''' 1 for Vinay        7 for Hari sir \n 2 for Nagaraju     8 for Ram \n 3 for Shyam        9 for Pawan \n 4 for Prashanth    10 for Sravanthi \n 5 for Irfan        11 for Aditya \n 6 for Sharma sir   12 for Deepthi''')
     print()
@@ -223,7 +223,6 @@ while urcal:
 
     if meetset == -1:
         print("The meeting is not possible.")   #Meet Not possible
-        urcal = int(input("Want to schedule another meeting \n Enter 0 or 1 : \n"))  #Input for the next meet
         continue  
     else:
         df = pd.DataFrame({'duration': meetset})   #converting the minutes schedule into hours schedule
@@ -241,12 +240,10 @@ while urcal:
         
         dic = {'Meet Time': Allmeets , 'Host' : Allhosts, 'Attendee': Allattendees} #storing them into a dictionary
         mdf = pd.DataFrame(dic)   #storing dictionary into a dataframe
-        mdf.to_csv("C:/Users/Vinay Muthangi/Gotcha/EmployeeSchedule/Meeting.csv", index=False) #writing the dataframe into csv
+        #mdf.to_csv("C:/Users/Vinay Muthangi/Gotcha/EmployeeSchedule/Meeting.csv", index=False) #writing the dataframe into csv
 
         #update employees free time
         emp_sch[i] = update(emp1,meetset)
         emp_sch[j] = update(emp2,meetset)
 
         #print(emp_sch)
-    #Input for the next meet
-    urcal = int(input("Want to schedule another meeting \n Enter 0 or 1 : \n"))
