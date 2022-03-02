@@ -42,7 +42,7 @@ def update(upemp, upans):
 
 
 def meeting(memp, ech):
-    li = list()
+    mli = list()
     memp.sort()
     #print(memp)
     start = ech[0]
@@ -69,20 +69,20 @@ def meeting(memp, ech):
     a2 = ech[1]
     
     if q1 == a1 and q2 == a2:
-        li.append([a1,q2])
+        mli.append([a1,q2])
     elif q1 == a1 and a2 < q2:
-        li.append([a1,a2])
+        mli.append([a1,a2])
     elif q1 == a1 and q2 <  a2:
-        li.append([a1,q2])
+        mli.append([a1,q2])
     elif q1 < a1 < q2 and q2 == a2:
-        li.append([a1,a2])
+        mli.append([a1,a2])
     elif q1 < a1 < q2 and q2 < a2:
-        li.append([a1,q2])
+        mli.append([a1,q2])
     elif q1 < a1 < q2 and a2 < q2:
         
-        li.append([a1,a2])
+        mli.append([a1,a2])
     #print(li)
-    return li
+    return mli
 
 
 def meetingscheduler(emp1,emp2,meetime):
@@ -136,15 +136,15 @@ emp4          09:30    12:30  13:30           18:30
 emp5          09:20    11:40  12:30           17:30
 '''
 
-def covert(li):
-    for i in range(len(li)):
+def covert(cli):
+    for i in range(len(cli)):
     #print(i)
-        j = li[i].split(':')
+        j = cli[i].split(':')
         item1 = int(j[0])
         item2 = int(j[1])
         item = item1*60 + item2 
-        li[i] = item 
-    return li
+        cli[i] = item 
+    return cli
 
 
 
