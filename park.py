@@ -1,3 +1,5 @@
+import pandas as pd
+
 class vehicle:
     def __init__(self,owner,kind,name,number,intime):
         self.owner = owner
@@ -239,6 +241,9 @@ while run:
         c -= 1
         print(f"The parking charges for {veh_num} is : {amt}")
         print(series)
+    dic = { 'series A': series[0], 'series B': series[1], 'series C': series[2], 'series D': series[3]  }
+    mdf = pd.DataFrame(dic)
+    mdf.to_csv("/home/vinay/Gotcha/Parking.csv", index=False)
     exit_ = int(input("Want to exit of the program :"))
     if exit_ == 1:
         break

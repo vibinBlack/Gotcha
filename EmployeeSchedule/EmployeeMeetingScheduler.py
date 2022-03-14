@@ -157,7 +157,7 @@ def covert(li):              #li consists time in hr:min
 
 
 # reading csv file
-ddf = pd.read_csv("C:/Users/Vinay Muthangi/Gotcha/EmployeeSchedule/EmployeeMeetingScheduler.csv")
+ddf = pd.read_csv("/home/Gotcha/EmployeeSchedule/EmployeeMeetingScheduler.csv")
 #print(df)
 #storing all confirmed meets into Allmeets list
 Allmeets = list()
@@ -240,7 +240,7 @@ while int(input("Want to schedule a new meet \n Enter 0 or 1 : \n")):
         
         dic = {'Meet Time': Allmeets , 'Host' : Allhosts, 'Attendee': Allattendees} #storing them into a dictionary
         mdf = pd.DataFrame(dic)   #storing dictionary into a dataframe
-        #mdf.to_csv("C:/Users/Vinay Muthangi/Gotcha/EmployeeSchedule/Meeting.csv", index=False) #writing the dataframe into csv
+        #mdf.to_csv("/home/vinay/Gotcha/EmployeeSchedule/Meeting.csv", index=False) #writing the dataframe into csv
 
         #update employees free time
         emp_sch[i] = update(emp1,meetset)
