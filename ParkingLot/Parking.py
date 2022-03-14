@@ -1,12 +1,14 @@
 import pandas as pd
 
 class vehicle:
-    def __init__(self,owner,kind,name,number,intime):
+    def __init__(self,owner,kind,name,number,intime,outime,charges):
         self.owner = owner
         self.kind = kind
         self.name = name
         self.number = number
         self.intime = intime
+        self.outime = outime
+        self.charges = charges
     def description(self,milage,capacity,manufacturer,fueltype):
         self.milage = milage
         self.capacity = capacity
@@ -29,15 +31,18 @@ class lot:
         self.width = width
         self.height = height
 
-def parker(A,B,C,D,vehicle,no):
-    given = vehicle
+def parker(A,B,C,D,vehicle):
     count = 0
+    serial = 0
+    index = 0
     if vehicle == 'Car':
         if count == 0 and A.count(vehicle)<6:
             for i in range(len(A)):
                 if A[i] == 0:
                     A[i] = vehicle
                     count = 1
+                    serial = "A"
+                    index = i
                     break
         elif count == 0:
             print("The 60% of lot A is full of cars \nGo to lot B")
@@ -46,6 +51,8 @@ def parker(A,B,C,D,vehicle,no):
                 if B[i] == 0:
                     B[i] = vehicle
                     count = 1
+                    serial = "B"
+                    index = i
                     break
         elif count == 0:
             print("The 60% of lot B is full of cars \nGo to lot C")
@@ -54,6 +61,8 @@ def parker(A,B,C,D,vehicle,no):
                 if C[i] == 0:
                     C[i] = vehicle
                     count = 1
+                    serial = "C"
+                    index = i
                     break
         elif count == 0:
             print("The 60% of lot C is full of cars \nGo to lot D")
@@ -62,6 +71,8 @@ def parker(A,B,C,D,vehicle,no):
                 if D[i] == 0:
                     D[i] = vehicle
                     count = 1
+                    serial = "D"
+                    index = i
                     break
         elif count == 0:
             print("The 60% of lot D is full of cars \n NO MORE CARS CAN BE PARKED")
@@ -72,6 +83,8 @@ def parker(A,B,C,D,vehicle,no):
                 if A[i] == 0:
                     A[i] = vehicle
                     count = 1
+                    serial = "A"
+                    index = i
                     break
         elif count == 0:
             print("The 30% of lot A is full of bikes \nGo to lot B")
@@ -80,6 +93,8 @@ def parker(A,B,C,D,vehicle,no):
                 if B[i] == 0:
                     B[i] = vehicle
                     count = 1
+                    serial = "B"
+                    index = i
                     break
         elif count == 0 :
             print("The 30% of lot B is full of bikes \nGo to lot C")
@@ -88,6 +103,8 @@ def parker(A,B,C,D,vehicle,no):
                 if C[i] == 0:
                     C[i] = vehicle
                     count = 1
+                    serial = "C"
+                    index = i
                     break
         elif count == 0 :
             print("The 30% of lot C is full of bikes \nGo to lot D")
@@ -96,6 +113,8 @@ def parker(A,B,C,D,vehicle,no):
                 if D[i] == 0:
                     D[i] = vehicle
                     count = 1
+                    serial = "D"
+                    index = i
                     break
         elif count == 0 :
             print("The 30% of lot D is full of bikes \n NO MORE BIKES CAN BE PARKED")
@@ -106,6 +125,8 @@ def parker(A,B,C,D,vehicle,no):
                 if A[i] == 0:
                     A[i] = vehicle
                     count = 1
+                    serial = "A"
+                    index = i
                     break
         elif count == 0 :
             print("The 10% of lot A is filled with buses \nGo to lot B")
@@ -114,6 +135,8 @@ def parker(A,B,C,D,vehicle,no):
                 if B[i] == 0:
                     B[i] = vehicle
                     count = 1
+                    serial = "B"
+                    index = i
                     break
         elif count == 0 :
             print("The 10% of lot B is filled with buses \nGo to lot C")
@@ -122,6 +145,8 @@ def parker(A,B,C,D,vehicle,no):
                 if C[i] == 0:
                     C[i] = vehicle
                     count = 1
+                    serial = "C"
+                    index = i
                     break
         elif count == 0 :
             print("The 10% of lot C is filled with buses \nGo to lot D")
@@ -130,12 +155,14 @@ def parker(A,B,C,D,vehicle,no):
                 if D[i] == 0:
                     D[i] = vehicle
                     count = 1
+                    serial = "D"
+                    index = i
                     break
         elif count == 0 :
             print("The 10% of lot D is filled with buses")
             print("NO MORE BUSES CAN BE PARKED")
         
-    return [A,B,C,D] 
+    return [A,B,C,D],serial, index
 
 def covert(li):              #li consists time in hr:min
     for i in range(len(li)):
@@ -171,6 +198,14 @@ A = [0,0,0,0,0,0,0,0,0,0]
 B = [0,0,0,0,0,0,0,0,0,0]
 C = [0,0,0,0,0,0,0,0,0,0]
 D = [0,0,0,0,0,0,0,0,0,0]
+owner = list()
+kind = list()
+name = list()
+number = list()
+intime = list()
+outtime = list()
+charges = list()
+ser = list()
 series = [A,B,C,D]
 
 obj_lot = lot(series,len(A),0)
@@ -180,9 +215,11 @@ print(obj_lot.width)
 print(obj_lot.height)
 
 obj_veh = [0 for i in range(len(A)*len(series))]
-vehnums = [0 for i in range(len(A)*len(series))]
+vehnums = [A,B,C,D]
+f = 0
 c = 0
-
+index = 0
+edic = {}
 run = int(input("Welcome to Parking lot: Enter 1 : "))
 while run:
     inp = int(input("1 for Parking  2 for Departure :"))
@@ -194,26 +231,47 @@ while run:
         vehicle_intime = str(input("Enter the intime for parking: "))
             #vehicle_milage = str(input("Vehicle's milage: "))
             #vehicle_capacity = str(input("Vehicle's capacity is: "))
-            #vehicle_manufacturer = str(input("Vehicle is manufactured by: "))
+            #vehicle_manufacturer = str(input("Vehicle is manufactured by: ")
         if vehicle_kind == 'Bus':
                 #vehicle_fuel = str(input("Enter the vehicle's fuel type: "))
             vehicle_length = int(input("Enter the length of vehicle: "))
             vehicle_width = int(input("Enter the width of vehicle: "))
             vehicle_height = int(input("Enter the height of vehicle: "))
-        obj_veh[c] = vehicle(vehicle_owner,vehicle_kind,vehicle_name,vehicle_number,vehicle_intime)
+        obj_veh[c] = vehicle(vehicle_owner,vehicle_kind,vehicle_name,vehicle_number,vehicle_intime,"None","None")
+        owner.append(obj_veh[c].owner)
+        kind.append(obj_veh[c].kind)
+        number.append(obj_veh[c].number)
+        name.append(obj_veh[c].name)
+        intime.append(obj_veh[c].intime)
+        outtime.append(obj_veh[c].outime)
+        charges.append(obj_veh[c].charges)
+        
+        
         if obj_veh[c].kind == "Bus":
             obj_veh[c].dimensions(vehicle_length,vehicle_width,vehicle_height)
             if obj_veh[c].length >= obj_lot.length or obj_veh[c].width >= obj_lot.width or obj_veh[c].height >= obj_lot.height:
                 print("Your vehicle can't be parked as your vehicle size exceeds the parking lot size")
                 continue
             else:
-                series = parker(A,B,C,D,obj_veh[c].kind,obj_veh[c].number)
-                vehnums[c] = obj_veh[c].number
-                c += 1
+                series, serial, index = parker(A,B,C,D,obj_veh[c].kind)
+                ser.append(serial)
         else:
-            series = parker(A,B,C,D,obj_veh[c].kind,obj_veh[c].number)
-            vehnums[c] = obj_veh[c].number
-            c += 1
+            series, serial, index = parker(A,B,C,D,obj_veh[c].kind)
+            print(serial)
+            ser.append(serial)
+        if serial == 'A':
+            f = 0
+        elif serial == 'B':
+            f = 1
+        elif serial == 'C':
+            f = 2
+        elif serial == 'D':
+            f = 3
+        vehnums[f][index] = obj_veh[c].number
+        edic = { "Vehicle's Owner": owner, "Customer's Vehicle": kind, "Vehicle Number": number, "Vehicle Name":name, "Intime":intime, "Series": ser, "Outime": outtime,"Parking Charges": charges}    
+        edf = pd.DataFrame(edic)
+        edf.to_csv("/home/vinay/Gotcha/ParkingLot/Parking.csv", index=False)
+        c += 1
         print(series)
     elif inp == 2:
         outime = str(input("Enter the outime of the customer :"))
@@ -223,12 +281,15 @@ while run:
         for i in range(len(vehnums)):
             if vehnums[i] == veh_num:
                 k = i
-        intime = obj_veh[k].intime
-        li = [intime, outime]
+        li = [obj_veh.intime, outime]
         intime , outime = covert(li)
-        duration = outime - intime
+        duration = outime - obj_veh
         #print(duration)
         amt = charge(duration)
+        obj_veh[k].charges = amt
+        rdic = { "Vehicle's Owner": owner, "Customer's Vehicle": kind, "Vehicle Number": number, "Vehicle Name":name, "Intime":intime, "Series": ser, "Outime": outime, "Parking Charges": amt }
+        rdf = pd.DataFrame(edic)
+        rdf.to_csv("/home/vinay/Gotcha/ParkingLot/Departure.csv", index=False)
         obj_veh[k] = 0 
         b = 0
         if k > 10:
@@ -237,13 +298,14 @@ while run:
                 k -= 10 
                     #print(b)
                     #print(k-1)
-        series[b][k] = 0
+        series[f][index] = 0
         c -= 1
         print(f"The parking charges for {veh_num} is : {amt}")
+        
         print(series)
     dic = { 'series A': series[0], 'series B': series[1], 'series C': series[2], 'series D': series[3]  }
     mdf = pd.DataFrame(dic)
-    mdf.to_csv("/home/vinay/Gotcha/Parking.csv", index=False)
+    mdf.to_csv("/home/vinay/Gotcha/ParkingLot/Lot.csv", index=False)
     exit_ = int(input("Want to exit of the program :"))
     if exit_ == 1:
         break
