@@ -1,0 +1,9 @@
+Owner,Vehicle,Vehicle Number,Model,Series,Intime,C,Outime,Charges
+Vinay,Car,TS77QW7777,Audi,A,09:00,0,18:15,100
+NagaRaju,Car,TS07BW1245,BMW,A,09:30,1,18:08,100
+Prashanth,Bus,TS12QW1212,Volvo,A,09:45,2,None,None
+Shyam,Bike,TS13QW1313,Victor,A,10:00,3,None,None
+Ram Chand,Bike,TS14QW1414,Activa,A,10:30,4,None,None
+Dasawanth,Bike,TS15QW1515,Tata Chatak,A,10:45,5,None,None
+Deepthi,Bike,TS17QW1717,Activa %G,A,10:50,6,None,None
+Aditya,Bus,TS18QW1818,Bharat Benz,A,10:10,6,None,None
